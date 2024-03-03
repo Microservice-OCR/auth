@@ -5,13 +5,13 @@ import (
     "auth/handlers"
     "auth/db"    
 	"log"
-    "github.com/joho/godotenv"
+    "os"
 )
 
 func main() {
-	err := godotenv.Load()
-    if err != nil {
-        log.Fatal("Erreur lors du chargement du fichier .env")
+	jwtSecret := os.Getenv("JWT_SECRET")
+    if jwtSecret == "" {
+        log.Fatal("La variable d'environnement JWT_SECRET n'est pas définie")
     }
 	
     db.Connect()
@@ -19,6 +19,10 @@ func main() {
     r := gin.Default()
 
     r.POST("/login", handlers.Login)
+    // Utiliser pour mes tests en local mais inutile pour le projet
+    r.POST("/signup", handlers.SignUp)
+    r.GET("/users", handlers.GetAllUsers)
+    r.DELETE("/users", handlers.DeleteAllUsers)
 
     r.Run(":8080") 
 }
