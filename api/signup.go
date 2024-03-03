@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"os"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -17,6 +18,14 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*") // or specify your domain
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	
+	jwtSecret := os.Getenv("JWT_SECRET")
+    if jwtSecret == "" {
+		http.Error(w, "JWT secret not found", http.StatusInternalServerError)
+    }
+	
+    db.Connect()
+	
 	input := models.User{}
 	
 	body, err := ioutil.ReadAll(r.Body)
