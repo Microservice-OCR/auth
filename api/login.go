@@ -28,7 +28,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
     }
 	
     db.Connect()
-	
+
 	var foundUser models.User
 
 	input := models.User{}
@@ -79,6 +79,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	tokenOutput := models.Output{}
 
 	tokenOutput.Token = tokenString
+	tokenOutput.ConnectedAt = time.Now()
 
 	jsonData, err := json.Marshal(tokenOutput)
 	if err != nil {
