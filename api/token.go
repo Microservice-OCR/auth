@@ -3,6 +3,7 @@ package api
 import (
     "context"
     "log"
+	"fmt"
     "auth/db"
 	"encoding/json"
 	"net/http"
@@ -31,6 +32,8 @@ func GetAllToken(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Erreur lors de la conversion en JSON", http.StatusInternalServerError)
         return
     }
+
+	fmt.Println(string(jsonData))
 
     w.Write(jsonData)
 }
