@@ -21,6 +21,11 @@
             "src": "/api/token",
             "methods": ["GET"],
             "dest": "/api/token.go"
+        },
+        {
+            "src": "/api/logout",
+            "methods": ["POST"],
+            "dest": "/api/logout.go"
         }
     ]
 }
