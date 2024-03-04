@@ -45,9 +45,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
     err = db.Collection.FindOne(context.TODO(), bson.M{"email": input.Email}).Decode(&foundUser)
     if err != nil {
-        http.Error(w, "Incorrect credentials", http.StatusUnauthorized)
+        http.Error(w, "Incorrect credential", http.StatusUnauthorized)
         return
     }
+
 
     err = bcrypt.CompareHashAndPassword([]byte(foundUser.Password), []byte(input.Password))
     if err != nil {

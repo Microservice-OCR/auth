@@ -33,7 +33,5 @@ func GetAllToken(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-	fmt.Println(string(jsonData))
-
     w.Write(jsonData)
 }
