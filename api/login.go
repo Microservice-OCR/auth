@@ -80,7 +80,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
     tokenOutput := models.Output{
         ID:          id,
         Token:       tokenString,
-        ConnectedAt: time.Now(),
+        ConnectedAt: time.Now().Unix(),
     }
     
     jsonData, err := json.Marshal(tokenOutput)
