@@ -4,12 +4,14 @@ import (
     "context"
     "log"
     "auth/db"
+	"encoding/json"
+	"net/http"
     "auth/models"
     "go.mongodb.org/mongo-driver/bson"
     "go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func GetAllToken() ([]models.Output, error) {
+func GetAllToken(w http.ResponseWriter, r *http.Request) {
 	db.Connect()
 
 	var tokens []models.Output
@@ -24,5 +26,11 @@ func GetAllToken() ([]models.Output, error) {
 		tokens = append(tokens, token)
 	}
 
-	return tokens, nil
+	jsonData, err := json.Marshal(tokens)
+    if err != nil {
+        http.Error(w, "Erreur lors de la conversion en JSON", http.StatusInternalServerError)
+        return
+    }
+
+    w.Write(jsonData)
 }
