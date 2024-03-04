@@ -19,7 +19,7 @@
         },
         {
             "src": "/api/token",
-            "methods": ["POST"],
+            "methods": ["GET"],
             "dest": "/api/token.go"
         }
     ]
