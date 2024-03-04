@@ -3,7 +3,6 @@ package api
 import (
     "context"
     "log"
-	"fmt"
     "auth/db"
 	"encoding/json"
 	"net/http"
