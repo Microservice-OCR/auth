@@ -77,7 +77,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
     tokenOutput := models.Output{
         Token:       tokenString,
         ConnectedAt: time.Now(),
-        UserID:      foundUser.ID,
     }
 
     jsonData, err := json.Marshal(tokenOutput)
