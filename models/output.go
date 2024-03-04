@@ -1,8 +1,12 @@
 package models
 
-import "time"
+import (
+	"time"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 type Output struct {
-	Token       string `bson:"token"`
-	ConnectedAt time.Time
+	Token       string             `json:"token"`
+	ConnectedAt time.Time          `json:"connectedAt"`
+	UserID      primitive.ObjectID `json:"userId,omitempty"`
 }
