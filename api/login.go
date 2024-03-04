@@ -75,7 +75,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    id := foundUser.ID.String();
+    id := foundUser.ID.Hex();
 
     tokenOutput := models.Output{
         ID:          id,
@@ -88,8 +88,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Erreur lors de la conversion en JSON", http.StatusInternalServerError)
         return
     }
-    
-    w.Write(jsonData)
 
     w.Write(jsonData)
 }
