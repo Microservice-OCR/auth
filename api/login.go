@@ -75,16 +75,21 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
+    id := foundUser.ID.String();
+
     tokenOutput := models.Output{
+        ID:          id,
         Token:       tokenString,
         ConnectedAt: time.Now(),
     }
-
+    
     jsonData, err := json.Marshal(tokenOutput)
     if err != nil {
         http.Error(w, "Erreur lors de la conversion en JSON", http.StatusInternalServerError)
         return
     }
+    
+    w.Write(jsonData)
 
     w.Write(jsonData)
 }

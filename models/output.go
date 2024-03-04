@@ -1,10 +1,9 @@
 package models
 
-import (
-	"time"
-)
+import "time"
 
 type Output struct {
-	Token       string             `json:"token"`
-	ConnectedAt time.Time          `json:"connectedAt"`
+    ID          string    `json:"id"`
+    Token       string    `json:"token"`
+    ConnectedAt time.Time `json:"connectedAt"`
 }
