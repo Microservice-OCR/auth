@@ -16,6 +16,11 @@
             "src": "/api/signup",
             "methods": ["POST"],
             "dest": "/api/signup.go"
+        },
+        {
+            "src": "/api/token",
+            "methods": ["POST"],
+            "dest": "/api/token.go"
         }
     ]
 }
