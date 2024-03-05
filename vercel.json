@@ -1,0 +1,31 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "/api/**/*.go",
+            "use": "@vercel/go"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/login",
+            "methods": ["POST"],
+            "dest": "/api/login.go"
+        },
+        {
+            "src": "/api/signup",
+            "methods": ["POST"],
+            "dest": "/api/signup.go"
+        },
+        {
+            "src": "/api/token",
+            "methods": ["GET"],
+            "dest": "/api/token.go"
+        },
+        {
+            "src": "/api/logout",
+            "methods": ["POST"],
+            "dest": "/api/logout.go"
+        }
+    ]
+}
