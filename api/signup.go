@@ -41,7 +41,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
     }
 
     var existingUser models.User
-    err = db.Collection.FindOne(context.TODO(), bson.M{"email": input.Email}).Decode(&existingUser)
+    err = db.UserCollection.FindOne(context.TODO(), bson.M{"email": input.Email}).Decode(&existingUser)
     if err == nil {
         http.Error(w, "Email is already in use", http.StatusBadRequest)
         return
@@ -55,7 +55,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 
     input.Password = string(hashedPassword)
 
-    _, err = db.Collection.InsertOne(context.TODO(), input)
+    _, err = db.UserCollection.InsertOne(context.TODO(), input)
     if err != nil {
         http.Error(w, "User creation failed", http.StatusInternalServerError)
         return

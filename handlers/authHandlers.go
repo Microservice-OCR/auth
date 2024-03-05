@@ -23,7 +23,7 @@ func Login(c *gin.Context) {
         return
     }
 
-    err := db.Collection.FindOne(context.TODO(), bson.M{"email": user.Email}).Decode(&foundUser)
+    err := db.UserCollection.FindOne(context.TODO(), bson.M{"email": user.Email}).Decode(&foundUser)
     if err != nil {
         c.JSON(http.StatusUnauthorized, gin.H{"error": "Identifiants incorrects"})
         return
@@ -70,7 +70,7 @@ func SignUp(c *gin.Context) {
     }
     user.Password = string(hashedPassword)
 
-    _, err = db.Collection.InsertOne(context.TODO(), user)
+    _, err = db.UserCollection.InsertOne(context.TODO(), user)
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la création de l'utilisateur"})
         return
@@ -82,7 +82,7 @@ func SignUp(c *gin.Context) {
 func GetAllUsers(c *gin.Context) {
     var users []models.User
 
-    cursor, err := db.Collection.Find(context.TODO(), bson.M{})
+    cursor, err := db.UserCollection.Find(context.TODO(), bson.M{})
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la récupération des utilisateurs"})
         return
@@ -108,7 +108,7 @@ func GetAllUsers(c *gin.Context) {
 
 func DeleteAllUsers(c *gin.Context) {
     // Supprimer tous les documents de la collection
-    _, err := db.Collection.DeleteMany(context.TODO(), bson.D{{}})
+    _, err := db.UserCollection.DeleteMany(context.TODO(), bson.D{{}})
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la suppression des utilisateurs"})
         return

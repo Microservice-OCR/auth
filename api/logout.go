@@ -30,7 +30,7 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 
     db.Connect()
 
-	_, err := db.Collection.DeleteOne(context.TODO(), bson.M{"token": token})
+	_, err := db.TokenCollection.DeleteOne(context.TODO(), bson.M{"token": token})
 	if err != nil {
 		http.Error(w, "Error deleting token", http.StatusInternalServerError)
 		return

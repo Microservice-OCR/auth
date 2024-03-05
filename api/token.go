@@ -15,7 +15,7 @@ func GetAllToken(w http.ResponseWriter, r *http.Request) {
 	db.Connect()
 
 	var tokens []models.Output
-	cursor, err := db.Collection.Find(context.Background(), bson.D{{}}, options.Find())
+	cursor, err := db.TokenCollection.Find(context.Background(), bson.D{{}}, options.Find())
 	if err != nil {
 		log.Fatal(err)
 	}

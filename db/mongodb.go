@@ -8,7 +8,8 @@ import (
     "os"
 )
 
-var Collection *mongo.Collection
+var UserCollection *mongo.Collection
+var TokenCollection *mongo.Collection
 
 func Connect() {
     uri := os.Getenv("MONGO_URI")
@@ -18,5 +19,6 @@ func Connect() {
         log.Fatal(err)
     }
 
-    Collection = client.Database("auth").Collection("users")
+    UserCollection = client.Database("auth").Collection("users")
+    TokenCollection = client.Database("auth").Collection("tokens")
 }

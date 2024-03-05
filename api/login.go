@@ -43,7 +43,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    err = db.Collection.FindOne(context.TODO(), bson.M{"email": input.Email}).Decode(&foundUser)
+    err = db.UserCollection.FindOne(context.TODO(), bson.M{"email": input.Email}).Decode(&foundUser)
     if err != nil {
         http.Error(w, "Incorrect credential", http.StatusUnauthorized)
         return
@@ -67,7 +67,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    _, err = db.Collection.InsertOne(context.TODO(), bson.M{
+    _, err = db.TokenCollection.InsertOne(context.TODO(), bson.M{
         "token": tokenString,
     })
     if err != nil {
