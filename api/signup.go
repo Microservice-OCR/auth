@@ -14,7 +14,9 @@ import (
 )
 
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
-
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    w.Header().Set("Access-Control-Allow-Methods", "POST")
+    w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 
     jwtSecret := os.Getenv("JWT_SECRET")
     if jwtSecret == "" {
