@@ -61,20 +61,11 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-	response := make(map[string]string)
 	if err != nil {
-		response["error"] = "User creation failed"
-		w.WriteHeader(http.StatusInternalServerError)
-	} else {
-		response["message"] = "User created successfully"
-		w.WriteHeader(http.StatusOK)
-	}
-	responseBody, err := json.Marshal(response)
-	if err != nil {
-		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(responseBody)
+        http.Error(w, "Erreur lors de la création de l'utilisateur: "+err.Error(), http.StatusBadRequest)
+        return
+    }
+
+    w.WriteHeader(http.StatusOK)
 
 }
